@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<form class="form-login" id="loginForm">
+
+    <div class="form-box">
+
+        <h2>@ViewData["Title"]</h2>
+
+        <div class="form-group">
+            <input type="Email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email">
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="inputClave" placeholder="Clave">
+        </div>
+
+        <div id="respuestaRegistro" class="form-text text-muted"></div>
+
+        <button type="submit" class="btn btn-rojo">Iniciar sesion</button>
+
+        <div class="registro">
+            <small id="opcionRegistrarse" class="form-text text-rojo" style="color: red;"><a href="/Usuario/Create">Registrarse</a></small>
+        </div>
+
+    </div>
+
+</form>
+
+
+

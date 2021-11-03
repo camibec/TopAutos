@@ -39,6 +39,7 @@ namespace TopAutos
             services.AddDbContext<TopAutosDatabaseContext>(options =>
             options.UseSqlServer(Configuration["ConnectionString:TopAutosDBConnection"
             ]));
+            services.AddSession();
             services.AddMvc().AddNewtonsoftJson(options =>
            options.SerializerSettings.ReferenceLoopHandling =
            ReferenceLoopHandling.Ignore)
@@ -66,6 +67,7 @@ namespace TopAutos
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
