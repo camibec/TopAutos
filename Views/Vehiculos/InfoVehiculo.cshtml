@@ -1,0 +1,40 @@
+﻿@model TopAutos.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Informacion Vehiculo";
+}
+
+<html>
+<body>
+    <div class="container">
+        <div class="box">
+
+            <div class="imagen">
+                <img width="40%" src="@Url.Content("~/img/")@Model.Imagen" />
+            </div>
+
+            <div class="detalle">
+                <h2> @Html.DisplayFor(model => model.Modelo)</h2>
+
+                <div>
+                    <p>Marca: @Html.DisplayFor(model => model.Marca)</p>
+                    <p>Año: @Html.DisplayFor(model => model.Ano)</p>
+                    <p>Precio: @Html.DisplayFor(model => model.Precio)</p>
+                    <p>Puertas: @Html.DisplayFor(model => model.CantPuertas) </p>
+                    <p>Tipo: @Html.DisplayFor(model => model.Tipo)</p>
+                    <p>Automatico: @Html.DisplayFor(model => model.VieneAutomatico)</p>
+                </div>
+            </div>
+
+            <div class="ranking">
+                <p>Votos: @Html.DisplayFor(model => model.Voto)</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Buscador">Volver al buscador</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div class="logo">
+        <img src="~/img/LogoTexto.png" />
+    </div>
+
+    <div class="registra">
+        <h2>Registrate y empeza a rankear</h2>
+        <p>Califica y guardate los autos que mas te gusten</p>
+        <div class="botonRegistro"><a href="/Usuario/Create">Click Aca</a></div>
+    </div>
+
+    <div class="buscador">
+        <form id="buscador" class="form-inline buscadorEnBusqueda" action="/Vehiculos/Buscador" method="get">
+            <div class="form-group mb-2">
+                <input class="form-control" type="text" id="modelo" name="modelo" placeholder="Modelo">
+            </div>
+            <div class="form-group mb-2">
+                <input class="form-control" type="text" id="marca" name="marca" placeholder="Marca">
+            </div>
+            <div class="form-group mb-2">
+                <input class="form-control" type="number" id="ano" name="ano" placeholder="Año">
+            </div>
+
+            <div class="form-group mb-2">
+                <select class="custom-select mr-sm-2" name="tipo" id="tipo">
+                    <option disable selected>Tipo de vehiculo</option>
+                    <option value="1">Auto</option>
+                    <option value="2">Pick Up</option>
+                    <option value="3">SUV</option>
+                    <option value="4">Deportivo</option>
+                </select>
+            </div>
+
+
+            <div class="buscador-buttons">
+
+                <button type="submit" class="form-group btn btn-primary mb-2">Buscar</button>
+
+                <a class="reload_icon" href="/Vehiculos/Buscador">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+
+            </div>
+
+        </form>
+    </div>
+
+    <div class="listado">
+        <h3> Ranking 2021 </h3>
+        <div class="masVotados">
+            @foreach (Vehiculo item in ViewBag.vehiculosConMasVotos)
+            {
+                <div class="tajeta">
+                    <a href="/Vehiculos/Details/@item.Id">
+                        <img width="45%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
+                        <div class="textoImagen"> @Html.DisplayFor(modelItem => item.Modelo) @Html.DisplayFor(modelItem => item.Marca)</div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>
+

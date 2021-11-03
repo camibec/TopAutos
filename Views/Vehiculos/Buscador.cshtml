@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Vehiculo>
+
+@{ ViewData["Title"] = "Buscador de vehiculos"; }
+
+<form id="buscador" class="form-inline buscadorEnBusqueda" action="/Vehiculos/Buscador" method="get">
+    <div class="form-group mb-2">
+        <input class="form-control" type="text" id="modelo" name="modelo" placeholder="Modelo">
+    </div>
+    <div class="form-group mb-2">
+        <input class="form-control" type="text" id="marca" name="marca" placeholder="Marca">
+    </div>
+    <div class="form-group mb-2">
+        <input class="form-control" type="number" id="ano" name="ano" placeholder="Año">
+    </div>
+
+    <div class="form-group mb-2">
+        <select class="custom-select mr-sm-2" name="tipo" id="tipo">
+            <option disable selected>Tipo de vehiculo</option>
+            <option value="1">Auto</option>
+            <option value="2">Pick Up</option>
+            <option value="3">SUV</option>
+            <option value="4">Deportivo</option>
+        </select>
+    </div>
+
+
+    <div class="buscador-buttons">
+
+        <button type="submit" class="form-group btn btn-primary mb-2">Buscar</button>
+
+        <a class="reload_icon" href="/Vehiculos/Buscador">
+            <i class="fas fa-sync-alt"></i>
+        </a>
+
+    </div>
+
+</form>
+
+<div class="vehiculos">
+    @foreach (var item in Model)
+    {
+        <div data-userid="1" data-vehiculoid="@item.Id" class="iVehiculo iVehiculo-@item.Id">
+
+            <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
+
+            <div class="datosVehiculo">
+                <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span style="float: right;">@Html.DisplayFor(modelItem => item.Ano)</span></p>
+                <p>@Html.DisplayFor(modelItem => item.Tipo) <span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver detalle</a></span></p>
+            </div>
+
+    
+        </div>
+    }
+
+</div>
+
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}
