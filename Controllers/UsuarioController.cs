@@ -20,9 +20,9 @@ namespace TopAutos.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
-            return View(await _context.Usuarios.ToListAsync());
+            return View();
         }
 
         // GET: Usuario/Create
@@ -36,7 +36,7 @@ namespace TopAutos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nombre,Email,Clave,Rol")] Usuario usuario)
         {
-          
+
             if (ModelState.IsValid)
             {
                 _context.Add(usuario);
@@ -49,24 +49,22 @@ namespace TopAutos.Controllers
             return View(usuario);
         }
 
-        // NO FUNCIONA
-        // POST: Usuario/CheckUsuario
+        // POST: Usuario/Create
         [HttpPost]
-        public async Task<IActionResult> CheckUsuario(String email, String clave)
+        public async Task<IActionResult> Login(String Email, String Clave)
         {
-            var usuario = await  _context.Usuarios.FirstOrDefaultAsync(m => m.Email == email && m.Clave == clave);
-            Console.WriteLine(email);
-            if (usuario == null)
-            {
-                return Ok(StatusCode(403));
-            }
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Email == Email && m.Clave == Clave);
+            Console.WriteLine(Email);
+
 
             HttpContext.Session.SetString("userName", usuario.Nombre);
             HttpContext.Session.SetInt32("userId", usuario.Id);
             HttpContext.Session.SetInt32("userRole", usuario.Rol);
 
-            return Ok(StatusCode(200));
+            return Redirect("/");
         }
+
+
 
         // POST: Usuario/Logout
         public async Task<IActionResult> Logout()

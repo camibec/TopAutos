@@ -185,8 +185,9 @@ namespace TopAutos.Controllers
             return _context.Vehiculos.Any(e => e.Id == id);
         }
 
+        
         // GET: Vehiculos/Buscador/
-        public async Task<IActionResult> Buscador(String modelo, String marca, int ano, int tipoVehiculo)
+        public async Task<IActionResult> Buscador(String modelo, String marca, int ano, int tipo)
         {
 
             IQueryable<Vehiculo> query = _context.Vehiculos;
@@ -213,21 +214,22 @@ namespace TopAutos.Controllers
             }
 
             //if (tipoVehiculo != 0){
-                switch (tipoVehiculo) 
-                {
-                    case 1:
-                        query = query.Where(p => p.Tipo == TipoVehiculo.Auto);
-                        break;
-                    case 2:
-                        query = query.Where(p => p.Tipo == TipoVehiculo.PickUp);
-                        break;
-                    case 3:
-                        query = query.Where(p => p.Tipo == TipoVehiculo.SUV);
-                        break;
-                    case 4:
-                        query = query.Where(p => p.Tipo == TipoVehiculo.Deportivo);
-                        break;
-                }
+            Console.WriteLine(tipo);
+            switch (tipo)
+            {
+                case 1:
+                    query = query.Where(p => p.Tipo == TipoVehiculo.Auto);
+                    break;
+                case 2:
+                    query = query.Where(p => p.Tipo == TipoVehiculo.PickUp);
+                    break;
+                case 3:
+                    query = query.Where(p => p.Tipo == TipoVehiculo.SUV);
+                    break;
+                case 4:
+                    query = query.Where(p => p.Tipo == TipoVehiculo.Deportivo);
+                    break;
+            }
             //}
 
             //Contenido de la query en una lista: 
