@@ -89,7 +89,7 @@ body {
 }
 
 .logo {
-    width: 40%;
+    width: 20%;
     height: auto;
     position: relative;
 
@@ -99,10 +99,10 @@ body {
     width: 100%;
     height: auto;
     text-align: left;
+    position: relative;
 }
 
 .listado {
-    background-color: #9e9e9e4d;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -120,7 +120,7 @@ body {
     margin-top: 20px;
 }
 
-.tarjeta {
+.card {
     width: 100%;
     height: auto;
     text-align: center;
@@ -135,4 +135,41 @@ body {
 
 .reload_icon {
     padding: 5px;
+}
+
+/* CLASIFICADOR */
+#form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+    #form p {
+        text-align: center;
+    }
+
+    #form label {
+        font-size: 20px;
+    }
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: grey;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+    color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+    color: orange;
 }

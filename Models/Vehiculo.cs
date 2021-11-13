@@ -22,6 +22,6 @@ namespace TopAutos.Models
         public TipoVehiculo Tipo { get; set; }
 
         public int Voto { get; set; } = 0;
-        // de 1 al 5 o algo asi, califican en vez de poner solo voto 
+        
     }
 }

@@ -1,32 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Iniciar sesion";
 }
 
-<form class="form-login" id="loginForm">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Usuario" asp-action="CheckUsuario">
 
-    <div class="form-box">
+            <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email">
+            </div>
 
-        <h2>@ViewData["Title"]</h2>
+            <div class="form-group">
+                <input type="password" class="form-control" id="inputClave" placeholder="Clave">
+            </div>
 
-        <div class="form-group">
-            <input type="Email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email">
+            <button type="submit" class="btn btn-rojo">Iniciar sesion</button>
+        </form>
+
+        <div class="registro" text-rigth>
+            <div id="registrar" class="form-text text-rojo" style="color: red;"><a href="/Usuario/Create">Registrarse</a></div>
         </div>
-
-        <div class="form-group">
-            <input type="password" class="form-control" id="inputClave" placeholder="Clave">
-        </div>
-
-        <div id="respuestaRegistro" class="form-text text-muted"></div>
-
-        <button type="submit" class="btn btn-rojo">Iniciar sesion</button>
-
-        <div class="registro">
-            <small id="opcionRegistrarse" class="form-text text-rojo" style="color: red;"><a href="/Usuario/Create">Registrarse</a></small>
-        </div>
-
     </div>
-
-</form>
-
-
-
+</div>

@@ -49,11 +49,13 @@ namespace TopAutos.Controllers
             return View(usuario);
         }
 
+        // NO FUNCIONA
         // POST: Usuario/CheckUsuario
         [HttpPost]
-        public async Task<IActionResult> CheckUsuario(String email, String password)
+        public async Task<IActionResult> CheckUsuario(String email, String clave)
         {
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Email == email && m.Clave == password);
+            var usuario = await  _context.Usuarios.FirstOrDefaultAsync(m => m.Email == email && m.Clave == clave);
+            Console.WriteLine(email);
             if (usuario == null)
             {
                 return Ok(StatusCode(403));

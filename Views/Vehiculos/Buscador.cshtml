@@ -44,7 +44,7 @@
             <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
 
             <div class="datosVehiculo">
-                <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span style="float: right;">@Html.DisplayFor(modelItem => item.Ano)</span></p>
+                <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span >@Html.DisplayFor(modelItem => item.Ano)</span></p>
                 <p>@Html.DisplayFor(modelItem => item.Tipo) <span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver detalle</a></span></p>
             </div>
 

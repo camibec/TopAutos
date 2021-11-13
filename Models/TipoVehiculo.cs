@@ -7,9 +7,9 @@ namespace TopAutos.Models
 {
     public enum TipoVehiculo
     {
-        Auto,
-        PickUp,
-        SUV,
-        Deportivo
+        Auto = 0,
+        PickUp = 1,
+        SUV = 2,
+        Deportivo = 3
     }
 }

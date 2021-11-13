@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,14 +14,30 @@ namespace TopAutos.Controllers
     public class VehiculosController : Controller
     {
         private readonly TopAutosDatabaseContext _context;
-
-        public VehiculosController(TopAutosDatabaseContext context)
+        private int LoggedId;
+        private int LoggedRole;
+        public VehiculosController(TopAutosDatabaseContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+
+            if (httpContextAccessor.HttpContext.Session.GetInt32("userId") != null)
+            {
+                LoggedId = (int)httpContextAccessor.HttpContext.Session.GetInt32("userId");
+            }
+            if (httpContextAccessor.HttpContext.Session.GetInt32("userRole") != null)
+            {
+                LoggedRole = (int)httpContextAccessor.HttpContext.Session.GetInt32("userRole");
+            }
         }
 
         // GET: Vehiculos
         public async Task<IActionResult> Index()
+        {
+            return View(await _context.Vehiculos.ToListAsync());
+        }
+
+        // GET: Vehiculos/Calificador
+        public async Task<IActionResult> Calificador()
         {
             return View(await _context.Vehiculos.ToListAsync());
         }
@@ -60,7 +77,6 @@ namespace TopAutos.Controllers
 
             return View(vehiculo);
         }
-
 
         // GET: Vehiculos/Create
         public IActionResult Create()
@@ -176,7 +192,7 @@ namespace TopAutos.Controllers
             IQueryable<Vehiculo> query = _context.Vehiculos;
 
             //Para que cuando nadie busca nada, me muestre todo el listado
-            if (modelo == null && marca == null && ano == 0 && tipoVehiculo == 0)
+            if (modelo == null && marca == null && ano == 0) //&& tipoVehiculo == 0
             {
                 query = _context.Vehiculos;
             }
@@ -196,9 +212,8 @@ namespace TopAutos.Controllers
                 query = query.Where(p => p.Ano == ano);
             }
 
-            if (tipoVehiculo != 0)
-            {
-                switch (tipoVehiculo)
+            //if (tipoVehiculo != 0){
+                switch (tipoVehiculo) 
                 {
                     case 1:
                         query = query.Where(p => p.Tipo == TipoVehiculo.Auto);
@@ -213,12 +228,49 @@ namespace TopAutos.Controllers
                         query = query.Where(p => p.Tipo == TipoVehiculo.Deportivo);
                         break;
                 }
-            }
+            //}
 
             //Contenido de la query en una lista: 
             List<Vehiculo> vehiculos = query.ToList();
 
             return View(vehiculos);
+        }
+
+        //GET: Vehiculos/VehiculosFav
+        public async Task<IActionResult> VehiculosFav()
+        {
+            if (LoggedId == 0)
+            {
+                return Redirect("/Usuario/Login");
+            }
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == LoggedId);
+            if (usuario == null)
+            {
+                return StatusCode(400);
+            }
+
+            var pu = _context.VehiculoFavUsuario.Where(b => b.Usuario == usuario).Include(c => c.Vehiculo).ToList();
+
+            return View(pu);
+        }
+
+        // POST: Vehiculos/Calificacion
+        [HttpPost]
+        public async Task<IActionResult> Calificacion(int usuarioId, int vehiculoId, int voto)
+        {
+            //Despues evaluar si esta logueado
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == 1); // Evaluar si tengo varios, con if al principio
+            var vehiculo = await _context.Vehiculos.FirstOrDefaultAsync(m => m.Id == vehiculoId);
+            var votosUsuario = await _context.VotosUsuario.FirstOrDefaultAsync(m => m.Usuario == usuario && m.Vehiculo == vehiculo);
+
+            vehiculo.Voto = 5;
+
+            _context.Vehiculos.Update(vehiculo);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(200); 
         }
     }
 }

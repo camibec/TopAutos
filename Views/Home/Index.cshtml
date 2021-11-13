@@ -1,6 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{ var _session = HttpContextAccessor.HttpContext.Session;}
+
+@{ String userName = _session.GetString("userName"); }
 
 <html>
 <head>
@@ -10,15 +16,20 @@
     <div class="banner">
 
         <div class="logo">
-            <img src="~/img/LogoTexto.png" />
+            <img src="~/img/LogoTexto2.png" />
         </div>
 
-        <div class="registra">
-            <h2>Registrate y empeza a rankear</h2>
-            <p>Califica y guardate los autos que mas te gusten</p>
-            <div class="botonRegistro"><a href="/Usuario/Create">Click Aca</a></div>
-        </div>
+        
 
+        <div class="registra" text-right>
+            @if (userName == null)
+            {
+                <h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>
+            }
+                <h4>Califica y guardate los autos que mas te gusten</h4>
+            
+        </div>
+        
     </div>
 
     <div class="buscador">
@@ -62,10 +73,14 @@
         <div class="masVotados">
             @foreach (Vehiculo item in ViewBag.vehiculosConMasVotos)
             {
-                <div class="tajeta">
+                <div class="card">
                     <a href="/Vehiculos/InfoVehiculo/@item.Id">
                         <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
-                        <div class="textoImagen"> @Html.DisplayFor(modelItem => item.Modelo) @Html.DisplayFor(modelItem => item.Marca)</div>
+                        <div class="textoImagen">
+                            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
+                            @Html.DisplayFor(modelItem => item.Voto) <!-- ACA FALTA PONERLE LOS VOTOS -->
+
+                        </div>
                     </a>
                 </div>
             }

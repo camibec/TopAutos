@@ -1,9 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{ var _session = HttpContextAccessor.HttpContext.Session;}
+
+@{ String userName = _session.GetString("userName"); }
+
+@{int userRole = 0;}
+
+@if (_session.GetInt32("userRole") != null)
+{
+    userRole = (int)_session.GetInt32("userRole");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TopAutos</title>
+    <title>@ViewData["Title"] - TopVehiculos</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,20 +24,51 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TopAutos</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TOPVehiculos</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="collapse navbar-collapse">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (userRole == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Index">Vehiculos</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Calificador">Califica</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
                         </li>
                     </ul>
+
+                    @if (userName != null)
+                    {
+                        @userName
+                        
+                        <div class="salir" text-right>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
+
+                        </div>
+
+                    }
+                    else
+                    {
+                        
+                        <div class="ingresar" text-right>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesion</a>
+                        </div>
+                    }
+
                 </div>
             </div>
         </nav>
