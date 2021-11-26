@@ -71,24 +71,27 @@
         <div class="masVotados">
             @foreach (Vehiculo item in ViewBag.vehiculosConMasVotos)
             {
-<div class="card">
-    <a href="/Vehiculos/InfoVehiculo/@item.Id">
-        <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
-        <div class="textoImagen">
-            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
-            @Html.DisplayFor(modelItem => item.Voto) <!-- ACA FALTA PONERLE LOS VOTOS -->
-        </div>
-    </a>
+                <div class="card">
+                    <a href="/Vehiculos/InfoVehiculo/@item.Id">
+                        <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
+                        <div class="textoImagen">
+                            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
+                        </div>
+                    </a>
 
-    <div class="clasificacion clasificacion-@item.Id">
-        <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
-        <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
-        <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
-        <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
-        <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
-    </div>
+                    <div class="estrellas">
+                        <div class="clasificacion clasificacion-@item.Id">
+                            <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
+                            <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
+                            <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
+                            <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
+                            <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+                        </div>
+                    </div>
 
-</div>}
+
+                </div>
+            }
         </div>
     </div>
 
@@ -101,6 +104,10 @@
 <style>
     .checked {
         color: orange;
+    }
+
+    .estrellas {
+        position: center;
     }
 </style>
 

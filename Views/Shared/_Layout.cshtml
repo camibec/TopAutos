@@ -40,30 +40,36 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Calificador">Califica</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
-                        </li>
                     </ul>
 
                     @if (userName != null)
                     {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Calificador">Califica</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
+                            </li>
+                        </ul>
+
                         @userName
-                        
+
                         <div class="salir" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
 
                         </div>
-
                     }
+
+
+
+                    
                     else
                     {
-                        
+
                         <div class="ingresar" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesion</a>
                         </div>

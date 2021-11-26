@@ -189,6 +189,10 @@ namespace TopAutos.Controllers
         // GET: Vehiculos/Buscador/
         public async Task<IActionResult> Buscador(String modelo, String marca, int ano, int tipo)
         {
+            if (LoggedId == 0)
+            {
+                return Redirect("/Usuario/Login");
+            }
 
             IQueryable<Vehiculo> query = _context.Vehiculos;
 
@@ -252,9 +256,11 @@ namespace TopAutos.Controllers
                 return StatusCode(400);
             }
 
-            var pu = _context.VehiculoFavUsuario.Where(b => b.Usuario == usuario).Include(c => c.Vehiculo).ToList();
+            var vehiculosUsuario = _context.VotosUsuario.Where(u => u.Usuario == usuario).Select(v => v.Vehiculo).ToList();
 
-            return View(pu);
+            
+
+            return View(vehiculosUsuario);
         }
 
         // POST: Vehiculos/Calificacion
@@ -262,6 +268,11 @@ namespace TopAutos.Controllers
         public async Task<IActionResult> Calificacion(int usuarioId, int vehiculoId, int voto)
         {
             //Despues evaluar si esta logueado
+            if (LoggedId == 0)
+            {
+                return Redirect("/Usuario/Login");
+            }
+
             Console.WriteLine("VEHICULO ID: " + vehiculoId);
             Console.WriteLine("VOTO: " + voto);
 
@@ -287,11 +298,16 @@ namespace TopAutos.Controllers
             Console.WriteLine("sumaDeVotosPorAuto: " + sumaDeVotosPorAuto);
             Console.WriteLine("cantidadDevotosDelAuto: " + cantidadDevotosDelAuto);
 
+            var promedio = 0;
             //Check que no sea cero
-            var promedio = sumaDeVotosPorAuto / cantidadDevotosDelAuto;
+            if (cantidadDevotosDelAuto > 0)
+            {
+                promedio = sumaDeVotosPorAuto / cantidadDevotosDelAuto;
+            }
+            
             Console.WriteLine("PROMEDIO: " + promedio);
 
-            //Redondear.
+            //Redondear
             vehiculo.Voto = (int)promedio;
 
             _context.Vehiculos.Update(vehiculo);
