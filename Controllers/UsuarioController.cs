@@ -53,15 +53,23 @@ namespace TopAutos.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(String Email, String Clave)
         {
+            
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Email == Email && m.Clave == Clave);
-            Console.WriteLine(Email);
 
+            if (usuario == null)
+            {
+                ViewBag.usuarioIncorrecto = "sasa";
+                return Ok(StatusCode(403)); //Mandar aviso (ver de mandar mensaje)
+                
+            }
 
             HttpContext.Session.SetString("userName", usuario.Nombre);
             HttpContext.Session.SetInt32("userId", usuario.Id);
             HttpContext.Session.SetInt32("userRole", usuario.Rol);
 
             return Redirect("/");
+            
+            
         }
 
 

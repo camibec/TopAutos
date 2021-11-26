@@ -1,67 +1,37 @@
 ﻿@model IEnumerable<TopAutos.Models.Vehiculo>
 
-@{
-    ViewData["Title"] = "Calificador";
-}
+@{ ViewData["Title"] = "Calificador"; }
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <div class="vehiculos">
     @foreach (var item in Model)
     {
-    <div class="@item.Id">
+<div class="sasa @item.Id">
 
     <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
 
     <div class="datosVehiculo">
         <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span>@Html.DisplayFor(modelItem => item.Ano)</span></p>
         <p>@Html.DisplayFor(modelItem => item.Tipo)</p>
-        <div>
-            <div class="clasificacion">
-                <input data-clasif="5" data-vid="@item.Id" class="clasif clasif-@item.Id" id="radio1" type="radio" name="estrellas" value="5">
-                <!---->
-                <label for="radio1">★</label>
-                <!---->
-                <input data-clasif="4" data-vid="@item.Id" class="clasif clasif-@item.Id" id="radio2" type="radio" name="estrellas" value="4">
-                <!---->
-                <label for="radio2">★</label>
-                <!---->
-                <input data-clasif="3" data-vid="@item.Id" class="clasif clasif-@item.Id" id="radio3" type="radio" name="estrellas" value="3">
-                <!---->
-                <label for="radio3">★</label>
-                <!---->
-                <input data-clasif="2" data-vid="@item.Id" class="clasif clasif-@item.Id" id="radio4" type="radio" name="estrellas" value="2">
-                <!---->
-                <label for="radio4">★</label>
-                <!---->
-                <input data-clasif="1" data-vid="@item.Id" class="clasif clasif-@item.Id" id="radio5" type="radio" name="estrellas" value="1">
-                <!---->
-                <label for="radio5">★</label>
-            </div>
+        <div class="clasificacion clasificacion-@item.Id">
+            <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
+            <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
+            <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
+            <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
+            <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
         </div>
         <p><span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver</a></span></p>
     </div>
 
+</div>}
 
-    </div>
+</div>
+
+
+<style>
+    .checked {
+        color: orange;
     }
-
-</div>        
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    
-    $(".clasif").on('click', function (event) {
-        let voto = $(this).attr('data-clasif');
-        let idv = $(this).attr('data-vid'); //NO ME ESTA FUNCIONANDO
-        console.log(voto)
-        console.log(idv)
-        console.log($(this))
-
-        $.post('/Vehiculos/Calificacion', { usuarioId: 1, vehiculoId: idv, voto: voto },
-            function (returnedData) {
-                //console.log(returnedData);
-            }
-        );
-    });
-    
-</script>
+</style>

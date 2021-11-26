@@ -1,12 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{ var _session = HttpContextAccessor.HttpContext.Session;}
 
 @{ String userName = _session.GetString("userName"); }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <html>
 <head>
@@ -19,17 +18,16 @@
             <img src="~/img/LogoTexto2.png" />
         </div>
 
-        
+
 
         <div class="registra" text-right>
             @if (userName == null)
             {
-                <h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>
-            }
-                <h4>Califica y guardate los autos que mas te gusten</h4>
-            
+<h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>}
+            <h4>Califica y guardate los autos que mas te gusten</h4>
+
         </div>
-        
+
     </div>
 
     <div class="buscador">
@@ -73,21 +71,36 @@
         <div class="masVotados">
             @foreach (Vehiculo item in ViewBag.vehiculosConMasVotos)
             {
-                <div class="card">
-                    <a href="/Vehiculos/InfoVehiculo/@item.Id">
-                        <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
-                        <div class="textoImagen">
-                            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
-                            @Html.DisplayFor(modelItem => item.Voto) <!-- ACA FALTA PONERLE LOS VOTOS -->
+<div class="card">
+    <a href="/Vehiculos/InfoVehiculo/@item.Id">
+        <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
+        <div class="textoImagen">
+            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
+            @Html.DisplayFor(modelItem => item.Voto) <!-- ACA FALTA PONERLE LOS VOTOS -->
+        </div>
+    </a>
 
-                        </div>
-                    </a>
-                </div>
-            }
+    <div class="clasificacion clasificacion-@item.Id">
+        <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
+        <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
+        <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
+        <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
+        <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+    </div>
+
+</div>}
         </div>
     </div>
 
 
+
 </body>
 </html>
+
+
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
 

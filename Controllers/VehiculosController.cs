@@ -262,17 +262,57 @@ namespace TopAutos.Controllers
         public async Task<IActionResult> Calificacion(int usuarioId, int vehiculoId, int voto)
         {
             //Despues evaluar si esta logueado
+            Console.WriteLine("VEHICULO ID: " + vehiculoId);
+            Console.WriteLine("VOTO: " + voto);
 
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == 1); // Evaluar si tengo varios, con if al principio
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == LoggedId); // Evaluar si tengo varios, con if al principio
             var vehiculo = await _context.Vehiculos.FirstOrDefaultAsync(m => m.Id == vehiculoId);
             var votosUsuario = await _context.VotosUsuario.FirstOrDefaultAsync(m => m.Usuario == usuario && m.Vehiculo == vehiculo);
 
-            vehiculo.Voto = 5;
+            if (votosUsuario != null)
+            {
+                votosUsuario.Voto = voto;
+                _context.VotosUsuario.Update(votosUsuario);
+            }
+            else
+            {
+                VotosUsuario votoUsuario = new VotosUsuario { Usuario = usuario, Vehiculo = vehiculo, Voto = voto };
+                _context.VotosUsuario.Add(votoUsuario);
+            }
 
-            _context.Vehiculos.Update(vehiculo);
             await _context.SaveChangesAsync();
 
-            return StatusCode(200); 
+            var sumaDeVotosPorAuto = _context.VotosUsuario.Where(u => u.Vehiculo == vehiculo).Sum(i => i.Voto);
+            var cantidadDevotosDelAuto = _context.VotosUsuario.Where(u => u.Vehiculo == vehiculo).Count();
+            Console.WriteLine("sumaDeVotosPorAuto: " + sumaDeVotosPorAuto);
+            Console.WriteLine("cantidadDevotosDelAuto: " + cantidadDevotosDelAuto);
+
+            //Check que no sea cero
+            var promedio = sumaDeVotosPorAuto / cantidadDevotosDelAuto;
+            Console.WriteLine("PROMEDIO: " + promedio);
+
+            //Redondear.
+            vehiculo.Voto = (int)promedio;
+
+            _context.Vehiculos.Update(vehiculo);
+
+            await _context.SaveChangesAsync();
+
+
+
+
+            return StatusCode(200);
+        }
+
+        // POST: Vehiculos/Porcalificacion
+        [HttpPost]
+        public async Task<IActionResult> Porcalificacion(String usuarioId)
+        {
+            //var pu = await _context.Vehiculos.FirstOrDefaultAsync(m => m.Id == 2);
+            var pu = _context.Vehiculos.ToList();
+
+            //return StatusCode(200);
+            return Ok(pu);
         }
     }
 }
