@@ -42,6 +42,15 @@ namespace TopAutos.Controllers
             return View(await _context.Vehiculos.ToListAsync());
         }
 
+        // GET: Vehiculos/Ranking
+        public async Task<IActionResult> Ranking()
+        {
+            var vehiculos = await _context.Vehiculos.Where(v => v.Voto > 0).OrderByDescending(v => v.Voto).ToListAsync(); 
+
+            return View(vehiculos);
+        }
+
+
         // GET: Vehiculos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -256,7 +265,8 @@ namespace TopAutos.Controllers
                 return StatusCode(400);
             }
 
-            var vehiculosUsuario = _context.VotosUsuario.Where(u => u.Usuario == usuario).Select(v => v.Vehiculo).ToList();
+            // En la vista de vehiculos favs se van a guardar los vehiculos que el usuario califico con cuatro o mas.
+            var vehiculosUsuario = _context.VotosUsuario.Where(u => u.Usuario == usuario && u.Voto >= 4).Select(v => v.Vehiculo).ToList();
 
             
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,10 @@ namespace TopAutos.Controllers
         }
 
         // Le traigo los autos mas votados
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            List<Vehiculo> vehiculosConMasVotos = new List<Vehiculo>();
+            /*List<Vehiculo> vehiculosConMasVotos = new List<Vehiculo>();
             var vehiculoTopfive = _context.Vehiculos.OrderByDescending(p => p.Voto).Take(5);
 
             foreach (Vehiculo element in vehiculoTopfive)
@@ -34,7 +35,11 @@ namespace TopAutos.Controllers
             }
 
             ViewBag.vehiculosConMasVotos = vehiculosConMasVotos;
-            return View();
+            return View();*/
+
+            var vehiculos = await _context.Vehiculos.Where(v => v.Voto > 0).OrderByDescending(v => v.Voto).Take(10).ToListAsync();
+
+            return View(vehiculos);
 
         }
 

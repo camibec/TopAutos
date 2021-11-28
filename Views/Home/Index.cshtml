@@ -1,10 +1,12 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@model IEnumerable<TopAutos.Models.Vehiculo>
+@{ ViewData["Title"] = "Home Page"; }
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{ var _session = HttpContextAccessor.HttpContext.Session;}
 
 @{ String userName = _session.GetString("userName"); }
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <html>
@@ -23,7 +25,9 @@
         <div class="registra" text-right>
             @if (userName == null)
             {
-<h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>}
+                <h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>
+            }
+            
             <h4>Califica y guardate los autos que mas te gusten</h4>
 
         </div>
@@ -41,7 +45,7 @@
             <div class="form-group mb-2">
                 <input class="form-control" type="number" id="ano" name="ano" placeholder="Año">
             </div>
-            <!--NO ESTA FUNCIONANDO BUSCAR POR TIPO-->
+
             <div class="form-group mb-2">
                 <select class="custom-select mr-sm-2" name="tipo" id="tipo">
                     <option disable selected>Tipo de vehiculo</option>
@@ -67,9 +71,9 @@
     </div>
 
     <div class="listado">
-        <h3> Ranking 2021 </h3>
+        <h3> TOP 5 - Mas votados </h3>
         <div class="masVotados">
-            @foreach (Vehiculo item in ViewBag.vehiculosConMasVotos)
+            @foreach (var item in Model)
             {
                 <div class="card">
                     <a href="/Vehiculos/InfoVehiculo/@item.Id">
@@ -90,8 +94,8 @@
                     </div>
 
 
-                </div>
-            }
+                </div>      
+             }
         </div>
     </div>
 
