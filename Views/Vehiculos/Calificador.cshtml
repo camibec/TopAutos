@@ -6,26 +6,29 @@
 
 
 <div class="vehiculos">
+    <h3>Acordate de calificar los vehiculos asi tu voto participa en el resultado del ranking</h3>
+    <br />
     @foreach (var item in Model)
     {
-<div class="sasa @item.Id">
+        <div class="v @item.Id">
 
-    <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
+            <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
 
-    <div class="datosVehiculo">
-        <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span>@Html.DisplayFor(modelItem => item.Ano)</span></p>
-        <p>@Html.DisplayFor(modelItem => item.Tipo)</p>
-        <div class="clasificacion clasificacion-@item.Id">
-            <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
-            <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
-            <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
-            <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
-            <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+            <div class="datosVehiculo">
+                <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span>@Html.DisplayFor(modelItem => item.Ano)</span></p>
+                <p>@Html.DisplayFor(modelItem => item.Tipo)</p>
+                <div class="clasificacion clasificacion-@item.Id">
+                    <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
+                    <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
+                    <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
+                    <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
+                    <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+                </div>
+                <p><span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver</a></span></p>
+            </div>
+
         </div>
-        <p><span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver</a></span></p>
-    </div>
-
-</div>}
+     }
 
 </div>
 

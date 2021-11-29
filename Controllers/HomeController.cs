@@ -37,7 +37,7 @@ namespace TopAutos.Controllers
             ViewBag.vehiculosConMasVotos = vehiculosConMasVotos;
             return View();*/
 
-            var vehiculos = await _context.Vehiculos.Where(v => v.Voto > 0).OrderByDescending(v => v.Voto).Take(10).ToListAsync();
+            var vehiculos = await _context.Vehiculos.Where(v => v.Voto > 0).OrderByDescending(v => v.Voto).Take(4).ToListAsync();
 
             return View(vehiculos);
 
@@ -48,7 +48,7 @@ namespace TopAutos.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

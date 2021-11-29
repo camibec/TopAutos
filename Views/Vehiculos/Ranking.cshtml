@@ -6,9 +6,11 @@
 
 
 <div class="vehiculos">
+    <h3>Mira el ranking dia a dia con los ultimos modelos de vehiculos</h3>
+    <br />
     @foreach (var item in Model)
     {
-<div class="sasa @item.Id">
+<div class="v @item.Id">
 
     <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
 

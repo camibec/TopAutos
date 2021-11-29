@@ -31,6 +31,14 @@ namespace TopAutos.Controllers
             return View();
         }
 
+
+        // GET: Usuario/Fallo
+        
+        public IActionResult Fallo()
+        {
+            return View();
+        }
+
         // POST: Usuario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -58,9 +66,10 @@ namespace TopAutos.Controllers
 
             if (usuario == null)
             {
-                ViewBag.usuarioIncorrecto = "sasa";
-                return Ok(StatusCode(403)); //Mandar aviso (ver de mandar mensaje)
-                
+
+               
+                return Redirect("/Usuario/Fallo");
+
             }
 
             HttpContext.Session.SetString("userName", usuario.Nombre);

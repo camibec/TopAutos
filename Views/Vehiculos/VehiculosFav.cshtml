@@ -7,9 +7,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="vehiculos">
+    <h3>Aca vas a poder ver los autos que mejor calificaste</h3>
+    <br />
     @foreach (var item in Model)
     {
-        <div data-userid="1" data-vehiculoid="@item.Id" class="iVehiculo iVehiculo-@item.Id">
+        <div data-userid="1" data-vehiculoid="@item.Id" class="iv-@item.Id">
 
             <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
 
