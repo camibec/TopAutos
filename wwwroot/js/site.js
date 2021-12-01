@@ -6,6 +6,7 @@
 $(".fa-star").on('click', function (event) {
     let voto = $(this).attr('data-clasif');
     let idv = $(this).attr('data-vid');
+    alert("¡Calificaste correctamente!");
     $.post('/Vehiculos/Calificacion', { usuarioId: 1, vehiculoId: idv, voto: voto },
         function (returnedData) {
             console.log(returnedData);
