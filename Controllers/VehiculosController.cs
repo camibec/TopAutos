@@ -309,6 +309,9 @@ namespace TopAutos.Controllers
             Console.WriteLine("cantidadDevotosDelAuto: " + cantidadDevotosDelAuto);
 
             var promedio = 0;
+
+            
+
             //Check que no sea cero
             if (cantidadDevotosDelAuto > 0)
             {

@@ -36,7 +36,7 @@ namespace TopAutos.Controllers
         
         public IActionResult Fallo()
         {
-            return View();
+            return View("~/Views/Usuario/Fallo.cshtml");
         }
 
         // POST: Usuario/Create
