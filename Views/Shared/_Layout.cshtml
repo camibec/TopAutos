@@ -33,42 +33,39 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (userRole == 1)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Index">Vehiculos</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Index">Vehiculos</a>
+                        </li>
+}
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Ranking">Ranking</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Calificador">Califica</a>
+                        </li>
+                        @if (userName != null)
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
+                        </li>
+}
                     </ul>
 
                     @if (userName != null)
                     {
-                        <ul class="navbar-nav flex-grow-1" text-left>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Calificador">Califica</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
-                            </li>
-                        </ul>
-
-
                         @userName
 
-                        <div class="salir" text-right>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
-
-                        </div>
-                    }
-                    else
-                    {
+                          <div class="salir" text-right>
+                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
+                          </div> 
+                     }else
+                     {
                         <div class="ingresar" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesion</a>
                         </div>
@@ -76,23 +73,8 @@
                         <div class="registrar" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">Registrarme</a>
                         </div>
+                     }
 
-                    }
-
-
-
-                    <!--
-    else
-    {
-
-        <div class="ingresar" text-right>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesion</a>
-        </div>
-
-        <div class="registrar" text-right>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">Registrarme</a>
-        </div>
-    }-->
 
                 </div>
             </div>
@@ -104,14 +86,9 @@
         </main>
     </div>
 
-    <!--<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TopVehiculos
-        </div>
-    </footer>
-     @RenderSection("Scripts", required: false)-->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> <!--libreria para el onclick-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--boostrap de js-->
     <script src="~/js/site.js" asp-append-version="true"></script>
 
 </body>

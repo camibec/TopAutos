@@ -13,12 +13,12 @@ namespace TopAutos.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
         private readonly TopAutosDatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger, TopAutosDatabaseContext context)
+        public HomeController(TopAutosDatabaseContext context)
         {
-            _logger = logger;
+            
             _context = context;
         }
 

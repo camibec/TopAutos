@@ -37,21 +37,21 @@
 </form>
 
 <div class="vehiculos">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="col-md-4">
+            <img class="card-img-top" width="25%" src="@Url.Content("/img/" + item.Imagen +"")" />
 
-    @foreach (var item in Model)
-    {
-        <div data-userid="1" data-vehiculoid="@item.Id" class="iVehiculo iVehiculo-@item.Id">
-
-            <div class="poster"><img width="25%" src="@Url.Content("/img/" + item.Imagen +"")" /></div>
-
-            <div class="datosVehiculo">
-                <p class="titulo">@Html.DisplayFor(modelItem => item.Modelo)<span >@Html.DisplayFor(modelItem => item.Ano)</span></p>
-                <p>@Html.DisplayFor(modelItem => item.Tipo) <span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver detalle</a></span></p>
+            <div class="card-body">
+                <p class="card-title" style="color: black">@Html.DisplayFor(modelItem => item.Modelo)</p>
+                <p class="card-text" style="color: black"><span>Año: @Html.DisplayFor(modelItem => item.Ano)</span><br />@Html.DisplayFor(modelItem => item.Tipo)</p>
+                <p><span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver detalle</a></span></p>
             </div>
-
-    
+                
         </div>
-    }
+        }
+    </div>
 
 </div>
 

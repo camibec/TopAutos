@@ -33,12 +33,21 @@ namespace TopAutos.Controllers
         // GET: Vehiculos
         public async Task<IActionResult> Index()
         {
+            if (LoggedRole != 1)
+            {
+                return Redirect("/");
+            }
+            
             return View(await _context.Vehiculos.ToListAsync());
         }
 
         // GET: Vehiculos/Calificador
         public async Task<IActionResult> Calificador()
         {
+            if (LoggedId == 0)
+            {
+                return Redirect("/Usuario/Login");
+            }
             return View(await _context.Vehiculos.ToListAsync());
         }
 
@@ -203,10 +212,11 @@ namespace TopAutos.Controllers
                 return Redirect("/Usuario/Login");
             }
 
+            // De esta forma voy acumulando los parametros en la query
             IQueryable<Vehiculo> query = _context.Vehiculos;
 
             //Para que cuando nadie busca nada, me muestre todo el listado
-            if (modelo == null && marca == null && ano == 0) //&& tipoVehiculo == 0
+            if (modelo == null && marca == null && ano == 0) 
             {
                 query = _context.Vehiculos;
             }
@@ -275,7 +285,7 @@ namespace TopAutos.Controllers
 
         // POST: Vehiculos/Calificacion
         [HttpPost]
-        public async Task<IActionResult> Calificacion(int usuarioId, int vehiculoId, int voto)
+        public async Task<IActionResult> Calificacion(int vehiculoId, int voto)
         {
             //Despues evaluar si esta logueado
             if (LoggedId == 0)
@@ -335,13 +345,13 @@ namespace TopAutos.Controllers
 
         // POST: Vehiculos/Porcalificacion
         [HttpPost]
-        public async Task<IActionResult> Porcalificacion(String usuarioId)
+        public async Task<IActionResult> Porcalificacion()
         {
-            //var pu = await _context.Vehiculos.FirstOrDefaultAsync(m => m.Id == 2);
-            var pu = _context.Vehiculos.ToList();
+            
+            var v = await _context.Vehiculos.ToListAsync();
 
-            //return StatusCode(200);
-            return Ok(pu);
+            
+            return Ok(v);
         }
     }
 }

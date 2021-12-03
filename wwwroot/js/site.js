@@ -3,31 +3,34 @@
 
 // Write your JavaScript code.
 
+//Capto un evento onclick, cuando toco en la clase fa-star se dispara
 $(".fa-star").on('click', function (event) {
     let voto = $(this).attr('data-clasif');
     let idv = $(this).attr('data-vid');
     alert("¡Calificaste correctamente!");
-    $.post('/Vehiculos/Calificacion', { usuarioId: 1, vehiculoId: idv, voto: voto },
-        function (returnedData) {
-            console.log(returnedData);
+    $.post('/Vehiculos/Calificacion', {vehiculoId: idv, voto: voto }, //Le pega a la url y le manda los parametros - lo que tengo en el controller
+        function () {
+            location.reload();
         }
     );
-    location.reload();
+    
 });
 
 
-
-$.post('/Vehiculos/Porcalificacion', { usuarioId: 2 },
+// cada vez que carga la pagina hace un post, esta puesto en el layout
+$.post('/Vehiculos/Porcalificacion',
     function (data) {
 
+        //data devuelve todos los vehiculos del sitio
 
         $.each(data, function (i, element) {
             //console.log(element);
             let elementId = element.id;
 
+            //encuentro el auto y obtengo las estrellas, cada span es un elementinn y pongo cada posicion para las estrellas
+            //despues chequeo el voto que llega y marco chequeadas las estrellas que sean
             $(".clasificacion-" + elementId).each(function (index, elementInn) {
-                // element == this
-                //console.log($(elementInn)[0].children[0]);
+                
                 let estrellaCinco = $(elementInn)[0].children[0];
                 let estrellaCuatro = $(elementInn)[0].children[1];
                 let estrellaTres = $(elementInn)[0].children[2];
