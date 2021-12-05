@@ -17,7 +17,7 @@
     <div class="banner">
 
         <div class="logo">
-            <img src="~/img/LogoTexto2.png" />
+            <img src="~/img/TopSoloTexto.png" />
         </div>
 
 
@@ -25,10 +25,10 @@
         <div class="registra" text-right>
             @if (userName == null)
             {
-                <h2><a href="/Usuario/Create">Registrate</a> y empeza a rankear</h2>
+                <h2><a href="/Usuario/Create">Registrate</a> y empeza a calificar! </h2>
             }
             
-            <h4>Califica y guardate los autos que mas te gusten</h4>
+            <h3>Unite asi podes tener guardados los autos que mas te gustaron</h3>
 
         </div>
 
@@ -71,7 +71,7 @@
     </div>
 
     <div class="listado">
-        <h3> TOP 4 - Mas votados </h3>
+        <h2> TOP 4 - Mas votados </h2>
         <div class="masVotados">
             @foreach (var item in Model)
             {

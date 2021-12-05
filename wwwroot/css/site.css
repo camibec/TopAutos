@@ -1,8 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/*@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
+
+
 body {
     background-color: #d9d9d9;
+    /*font-family: 'Patrick Hand', cursive;*/
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 20px;
 }
 
 a.navbar-brand {
@@ -100,6 +107,7 @@ body {
     height: auto;
     text-align: left;
     position: relative;
+    top: 50px;
 }
 
 .listado {
@@ -108,7 +116,7 @@ body {
 }
 
 .buscador {
-    width: 100%;
+    width: 200%;
     height: auto;
     margin-bottom: 20px;
 }
@@ -125,6 +133,8 @@ body {
     height: auto;
     text-align: center;
     color: white;
+    
+    
 }
 
 /* TAMBIEN VAN A ESTAR EN BUSCADOR */
@@ -173,3 +183,18 @@ label:hover ~ label {
 input[type="radio"]:checked ~ label {
     color: orange;
 }
+
+/* LAYOUT */
+
+.usuario {
+    background: #ffbd59;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border: 3px solid #d9d9d9;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+

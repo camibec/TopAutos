@@ -7,7 +7,9 @@
 $(".fa-star").on('click', function (event) {
     let voto = $(this).attr('data-clasif');
     let idv = $(this).attr('data-vid');
+    
     alert("¡Calificaste correctamente!");
+
     $.post('/Vehiculos/Calificacion', {vehiculoId: idv, voto: voto }, //Le pega a la url y le manda los parametros - lo que tengo en el controller
         function () {
             location.reload();

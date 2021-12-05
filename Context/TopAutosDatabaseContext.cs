@@ -16,7 +16,6 @@ namespace TopAutos.Context
         }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Vehiculo> Vehiculos { get; set; }
-        public DbSet<VehiculoFavUsuario> VehiculoFavUsuario { get; set; }
         public DbSet<VotosUsuario> VotosUsuario { get; set; }
 
     }

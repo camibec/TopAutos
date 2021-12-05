@@ -276,7 +276,10 @@ namespace TopAutos.Controllers
             }
 
             // En la vista de vehiculos favs se van a guardar los vehiculos que el usuario califico con cuatro o mas.
-            var vehiculosUsuario = _context.VotosUsuario.Where(u => u.Usuario == usuario && u.Voto >= 4).Select(v => v.Vehiculo).ToList();
+            var vehiculosUsuario = _context.VotosUsuario.Where(u => u.Usuario == usuario && u.Voto >= 4)
+                .Select(v => v.Vehiculo).OrderByDescending(v => v.Voto).ToList();
+
+
 
             
 
