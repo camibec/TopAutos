@@ -8,8 +8,8 @@ $(".fa-star").on('click', function (event) {
     let voto = $(this).attr('data-clasif');
     let idv = $(this).attr('data-vid');
     let idu = $(this).attr('data-uid');
-    
-    if (idu != null) {
+    console.log(idu);
+    if (idu != "") {
         alert("¡Calificaste correctamente!");
     } else {
         alert("Inicia sesion para poder calificar");

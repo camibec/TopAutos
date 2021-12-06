@@ -296,8 +296,8 @@ namespace TopAutos.Controllers
                 return Redirect("/Usuario/Login");
             }
 
-            Console.WriteLine("VEHICULO ID: " + vehiculoId);
-            Console.WriteLine("VOTO: " + voto);
+            Console.WriteLine("VEHICULO QUE CALIFICA - ID: " + vehiculoId);
+            Console.WriteLine("VOTO QUE PUSO: " + voto);
 
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == LoggedId); // Evaluar si tengo varios, con if al principio
             var vehiculo = await _context.Vehiculos.FirstOrDefaultAsync(m => m.Id == vehiculoId);
@@ -318,8 +318,8 @@ namespace TopAutos.Controllers
 
             var sumaDeVotosPorAuto = _context.VotosUsuario.Where(u => u.Vehiculo == vehiculo).Sum(i => i.Voto);
             var cantidadDevotosDelAuto = _context.VotosUsuario.Where(u => u.Vehiculo == vehiculo).Count();
-            Console.WriteLine("sumaDeVotosPorAuto: " + sumaDeVotosPorAuto);
-            Console.WriteLine("cantidadDevotosDelAuto: " + cantidadDevotosDelAuto);
+            Console.WriteLine("VOTOS QUE TIENE EL AUTO: " + sumaDeVotosPorAuto);
+            Console.WriteLine("CANT DE USUARIOS QUE VOTARON EL AUTO: " + cantidadDevotosDelAuto);
 
             var promedio = 0;
 
@@ -331,7 +331,7 @@ namespace TopAutos.Controllers
                 promedio = sumaDeVotosPorAuto / cantidadDevotosDelAuto;
             }
             
-            Console.WriteLine("PROMEDIO: " + promedio);
+            Console.WriteLine("PROMEDIO NUEVO: " + promedio);
 
             //Redondear
             vehiculo.Voto = (int)promedio;

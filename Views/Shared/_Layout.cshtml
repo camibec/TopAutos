@@ -36,8 +36,7 @@
                         {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Index">Vehiculos</a>
-                        </li>
-                        }
+                        </li>}
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Ranking">Ranking</a>
                         </li>
@@ -51,7 +50,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
-                            </li>}
+                            </li>
+}
                     </ul>
 
                     @if (userName != null)
@@ -62,22 +62,24 @@
 
                         <div class="salir" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
-                        </div> 
-                     }else
-                     {
+                        </div> }
+                    else
+                    {
                         <div class="ingresar" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesion</a>
                         </div>
 
                         <div class="registrar" text-right>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">Registrarme</a>
-                        </div>
-                     }
+                        </div>}
 
 
                 </div>
+
             </div>
         </nav>
+
+        
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -85,10 +87,10 @@
         </main>
     </div>
 
-    
+
     @RenderSection("Scripts", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script> <!--libreria para el onclick-->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--boostrap de js-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--boostrap de js  <script src="~/js/site.js"></script>  -->
     <script src="~/js/site.js" asp-append-version="true"></script>
 
 </body>
