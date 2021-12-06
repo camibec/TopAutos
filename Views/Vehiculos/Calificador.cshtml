@@ -2,6 +2,14 @@
 
 @{ ViewData["Title"] = "Calificador"; }
 
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{ var _session = HttpContextAccessor.HttpContext.Session;}
+
+@{ String userName = _session.GetString("userName"); }
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -21,11 +29,11 @@
                     <p class="card-title" style="color: black">@Html.DisplayFor(modelItem => item.Modelo)</p>
                     <p class="card-text" style="color: black"><span>Año: @Html.DisplayFor(modelItem => item.Ano)</span><br />@Html.DisplayFor(modelItem => item.Tipo)</p>
                     <div class="clasificacion clasificacion-@item.Id">
-                        <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
-                        <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
-                        <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
-                        <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
-                        <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+                        <span data-clasif="5" data-vid="@item.Id" data-uid="@userName" class="fa fa-star"></span>
+                        <span data-clasif="4" data-vid="@item.Id" data-uid="@userName" class="fa fa-star"></span>
+                        <span data-clasif="3" data-vid="@item.Id" data-uid="@userName" class="fa fa-star"></span>
+                        <span data-clasif="2" data-vid="@item.Id" data-uid="@userName" class="fa fa-star"></span>
+                        <span data-clasif="1" data-vid="@item.Id" data-uid="@userName" class="fa fa-star"></span>
                     </div>
                     <p><span class="detalleLink"><a href="/Vehiculos/InfoVehiculo/@item.Id">Ver</a></span></p>
                 </div>
@@ -34,7 +42,6 @@
         }
     </div>
 </div>
-
 
 
 <style>

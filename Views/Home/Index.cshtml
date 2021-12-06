@@ -7,6 +7,7 @@
 
 @{ String userName = _session.GetString("userName"); }
 
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <html>
@@ -25,9 +26,8 @@
         <div class="registra" text-right>
             @if (userName == null)
             {
-                <h2><a href="/Usuario/Create">Registrate</a> y empeza a calificar! </h2>
-            }
-            
+<h2><a href="/Usuario/Create">Registrate</a> y empeza a calificar! </h2>}
+
             <h3>Unite asi podes tener guardados los autos que mas te gustaron</h3>
 
         </div>
@@ -75,27 +75,27 @@
         <div class="masVotados">
             @foreach (var item in Model)
             {
-                <div class="card">
-                    <a href="/Vehiculos/InfoVehiculo/@item.Id">
-                        <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
-                        <div class="textoImagen">
-                            @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
+                    <div class="card">
+                        <a href="/Vehiculos/InfoVehiculo/@item.Id">
+                            <img width="65%" class="imagen" src="@Url.Content("/img/" + item.Imagen +"")" />
+                            <div class="textoImagen">
+                                @Html.DisplayFor(modelItem => item.Modelo)<br /> @Html.DisplayFor(modelItem => item.Marca) <br />
+                            </div>
+                        </a>
+
+                        <div class="estrellas">
+                            <div class="clasificacion clasificacion-@item.Id">
+                                <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
+                                <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
+                                <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
+                                <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
+                                <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
+                            </div>
                         </div>
-                    </a>
-
-                    <div class="estrellas">
-                        <div class="clasificacion clasificacion-@item.Id">
-                            <span data-clasif="5" data-vid="@item.Id" class="fa fa-star"></span>
-                            <span data-clasif="4" data-vid="@item.Id" class="fa fa-star"></span>
-                            <span data-clasif="3" data-vid="@item.Id" class="fa fa-star"></span>
-                            <span data-clasif="2" data-vid="@item.Id" class="fa fa-star"></span>
-                            <span data-clasif="1" data-vid="@item.Id" class="fa fa-star"></span>
-                        </div>
-                    </div>
 
 
-                </div>
-            }
+                    </div>      
+             }
         </div>
     </div>
 
@@ -103,6 +103,7 @@
 
 </body>
 </html>
+
 
 
 <style>

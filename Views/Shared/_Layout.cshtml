@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img width="40" src="~/img/TopSinTexto.png"/></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img width="40" src="~/img/TopSinTexto.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,13 +46,12 @@
                         </li>
                         @if (userName != null)
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
-                        </li>
-}
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="Buscador">Buscador</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehiculos" asp-action="VehiculosFav">Mis vehiculos</a>
+                            </li>}
                     </ul>
 
                     @if (userName != null)
@@ -61,9 +60,9 @@
                             @userName
                         </div>
 
-                          <div class="salir" text-right>
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
-                          </div> 
+                        <div class="salir" text-right>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Salir</a>
+                        </div> 
                      }else
                      {
                         <div class="ingresar" text-right>
@@ -86,6 +85,7 @@
         </main>
     </div>
 
+    
     @RenderSection("Scripts", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script> <!--libreria para el onclick-->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--boostrap de js-->
